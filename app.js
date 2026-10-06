@@ -749,7 +749,7 @@ function openLesson(id){
     </div>
     <h2>${esc(l.title)}</h2>
     ${(typeof BEGINNER !== "undefined" && BEGINNER[l.id])?`<div class="beginner">🌱 <b>لو أول مرة تتعلم برمجة — اقرا ده الأول:</b><br>${BEGINNER[l.id]}</div>`:""}
-    <div class="explain">${l.html}</div>
+    <div class="explain">${(typeof DEEP !== "undefined" && DEEP[l.id]) ? DEEP[l.id] : l.html}</div>
     ${(typeof STRONG !== "undefined" && STRONG[l.id])?`<div class="strong">💪 <b>تثبيت الأساس:</b> ${STRONG[l.id]}</div>`:""}
     <h3>💻 الأمثلة (من السهل للصعب)</h3>`;
   l.examples.forEach((ex, i) => {
