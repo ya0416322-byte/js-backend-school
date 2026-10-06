@@ -729,9 +729,13 @@ function openLesson(id){
     <div class="explain">${l.html}</div>
     <h3>💻 الأمثلة (من السهل للصعب)</h3>`;
   l.examples.forEach((ex, i) => {
+    const w = (typeof WHY !== "undefined" && WHY[l.id] && WHY[l.id][i]) || "";
+    const b = (typeof BETTER !== "undefined" && BETTER[l.id] && BETTER[l.id][i]) || "";
     h += `<div class="example">
       <div class="ex-head"><b>${esc(ex.title)}</b><span class="level ${esc(ex.level)}">${esc(ex.level)}</span></div>
       <pre>${esc(ex.code)}</pre>
+      ${w?`<div class="why">🔍 <b>ليه كتبناه كده؟</b> ${w}</div>`:""}
+      ${b?`<div class="better">🚀 <b>في أحسن؟</b> ${b}</div>`:""}
       ${ex.note?`<div class="note">💡 ${esc(ex.note)}</div>`:""}
       <div class="ex-actions">
         ${ex.runnable?`<button class="btn small primary" onclick="runExample(${idx},${i})">▶ تشغيل المثال</button>`:`<span class="tag">💻 شغّله عندك في التيرمينال (Node)</span>`}

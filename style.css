@@ -71,6 +71,10 @@ body.light .hero-sub{color:#334155}
 pre{direction:ltr;text-align:left;margin:0;background:var(--code-bg);color:#e2e8f0;padding:16px;overflow:auto;font-family:Consolas,monospace;font-size:13.5px;line-height:1.7}
 .output{background:#020617;color:#4ade80;border-top:1px dashed #334155;padding:10px 14px;font-family:monospace;font-size:13px;direction:ltr;text-align:left;white-space:pre-wrap}
 .note{padding:8px 14px;font-size:13px;color:var(--muted);background:var(--card2)}
+.why{padding:10px 14px;font-size:13.5px;background:#22c55e12;border-top:1px dashed #22c55e55}
+.why b{color:#4ade80}
+.better{padding:10px 14px;font-size:13.5px;background:#f7df1e0e;border-top:1px dashed #f7df1e55}
+.better b{color:var(--accent)}
 .ex-actions{display:flex;gap:8px;padding:10px 14px;background:var(--card2);flex-wrap:wrap}
 .exercise{background:#38bdf811;border:1px solid #38bdf833;border-radius:12px;padding:14px;margin-top:14px}
 .quiz{background:#a78bfa11;border:1px solid #a78bfa33;border-radius:12px;padding:14px;margin-top:12px}
