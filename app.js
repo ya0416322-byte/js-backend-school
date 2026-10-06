@@ -727,6 +727,7 @@ function openLesson(id){
     </div>
     <h2>${esc(l.title)}</h2>
     <div class="explain">${l.html}</div>
+    ${(typeof STRONG !== "undefined" && STRONG[l.id])?`<div class="strong">💪 <b>تثبيت الأساس:</b> ${STRONG[l.id]}</div>`:""}
     <h3>💻 الأمثلة (من السهل للصعب)</h3>`;
   l.examples.forEach((ex, i) => {
     const w = (typeof WHY !== "undefined" && WHY[l.id] && WHY[l.id][i]) || "";
@@ -750,8 +751,20 @@ function openLesson(id){
     l.quiz.options.forEach((op, oi) => { h += `<button onclick="answerQuiz(${idx},${oi},this)">${esc(op)}</button>`; });
     h += `</div><div class="quiz-msg" id="qmsg-${idx}"></div></div>`;
   }
+  const probs = (typeof PROBLEMS !== "undefined" && PROBLEMS[l.id]) || [];
+  let probsHtml = "";
+  if (probs.length) {
+    probsHtml = `<div class="probs"><h3>🧩 مسائل تثبيت الأساس</h3><p class="probs-sub">حل بنفسك الأول — ولو وقفت افتح التلميح، والحل آخر حاجة تبص عليها.</p>`;
+    probs.forEach((p, i) => {
+      probsHtml += `<div class="prob"><div><b>مسألة ${i+1} <span class="level ${p.level}">${p.level}</span>:</b> ${esc(p.q)}</div>
+      <div class="prob-btns"><button class="btn small" onclick="toggleBox('h-${idx}-${i}')">💡 تلميح</button><button class="btn small" onclick="toggleBox('s-${idx}-${i}')">✅ الحل النموذجي</button></div>
+      <div class="hintbox hidden" id="h-${idx}-${i}">💡 ${esc(p.hint)}</div>
+      <div class="solbox hidden" id="s-${idx}-${i}"><b>✅ الحل:</b><pre>${esc(p.sol)}</pre></div></div>`;
+    });
+    probsHtml += `</div>`;
+  }
   const prev = flat[idx-1], next = flat[idx+1];
-  h += `<div class="nav-btns">
+  h += probsHtml + `<div class="nav-btns">
     ${prev?`<button class="btn" onclick="openLesson('${prev.id}')">→ السابق: ${esc(prev.title)}</button>`:"<span></span>"}
     ${next?`<button class="btn primary" onclick="openLesson('${next.id}')">التالي: ${esc(next.title)} ←</button>`:""}
   </div>

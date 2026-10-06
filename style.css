@@ -75,6 +75,15 @@ pre{direction:ltr;text-align:left;margin:0;background:var(--code-bg);color:#e2e8
 .why b{color:#4ade80}
 .better{padding:10px 14px;font-size:13.5px;background:#f7df1e0e;border-top:1px dashed #f7df1e55}
 .better b{color:var(--accent)}
+.strong{background:linear-gradient(135deg,#22c55e22,#38bdf822);border:1px solid #22c55e55;border-radius:12px;padding:14px;margin:14px 0;font-size:14.5px}
+.probs{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:16px;margin-top:16px}
+.probs h3{margin-top:0}
+.probs-sub{color:var(--muted);font-size:13px;margin:-6px 0 10px}
+.prob{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:10px}
+.prob-btns{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.hintbox{background:#f7df1e12;border:1px dashed #f7df1e66;border-radius:10px;padding:10px;margin-top:8px;font-size:13.5px}
+.solbox{background:#22c55e0e;border:1px dashed #22c55e66;border-radius:10px;padding:10px;margin-top:8px}
+.solbox pre{margin-top:8px;border-radius:8px}
 .ex-actions{display:flex;gap:8px;padding:10px 14px;background:var(--card2);flex-wrap:wrap}
 .exercise{background:#38bdf811;border:1px solid #38bdf833;border-radius:12px;padding:14px;margin-top:14px}
 .quiz{background:#a78bfa11;border:1px solid #a78bfa33;border-radius:12px;padding:14px;margin-top:12px}
