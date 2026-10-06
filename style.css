@@ -5,6 +5,7 @@
   --code-bg:#0a0f24;
 }
 *{box-sizing:border-box}
+html,body{overflow-x:clip;max-width:100%}
 body{margin:0;font-family:"Segoe UI",Tahoma,Arial,sans-serif;background:radial-gradient(1000px 500px at 80% -10%,#1e2a6b 0%,var(--bg) 60%);color:var(--text);line-height:1.9}
 body.light{--bg:#f4f6ff;--bg2:#fff;--card:#fff;--card2:#f1f5ff;--text:#0f172a;--muted:#475569;--border:#dbe3ff;--code-bg:#0f172a;background:#f4f6ff}
 a{color:var(--blue)}
@@ -105,8 +106,8 @@ pre{direction:ltr;text-align:left;margin:0;background:var(--code-bg);color:#e2e8
 .side-head-row{display:flex;justify-content:space-between;align-items:center}
 @media(max-width:900px){
   .layout{grid-template-columns:minmax(0,1fr)}
-  .sidebar{position:fixed;top:0;bottom:0;right:0;left:auto;width:min(340px,88vw);z-index:100;transform:translateX(100%);transition:.3s;height:100vh;overflow-y:auto}
-  .sidebar.open{transform:none;box-shadow:-20px 0 60px #00000088}
+  .sidebar{position:fixed;top:0;bottom:0;right:0;left:auto;width:min(340px,88vw);z-index:100;transform:translateX(105%);visibility:hidden;transition:transform .3s,visibility .3s;height:100vh;overflow-y:auto}
+  .sidebar.open{transform:none;visibility:visible;box-shadow:-20px 0 60px #00000088}
   .menu-fab{display:block}
   .topbar{flex-wrap:wrap;padding:10px 12px;gap:10px}
   .brand h1{font-size:16px}
