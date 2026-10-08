@@ -159,3 +159,20 @@ pre{direction:ltr;text-align:left;margin:0;background:var(--code-bg);color:#e2e8
   .hero-grid{grid-template-columns:1fr 1fr;gap:8px}
   .btn{padding:8px 12px;font-size:14px}
 }
+/* ---- light mode color fixes ---- */
+body.light .hero{background:linear-gradient(135deg,#ffffff,#e0f2fe)}
+body.light .hero-card{background:#ffffff;border-color:var(--border)}
+body.light .hero-card b{color:#a16207}
+body.light .hero-card span{color:var(--muted)}
+body.light .filter-box{background:#eef2ff}
+body.light a{color:#0284c7}
+body.light .why b{color:#15803d}
+body.light .better b{color:#a16207}
+body.light #trackName{color:#a16207}
+body.light .tag.backend{color:#15803d}
+body.light .tag.elzero{color:#a16207}
+body.light .level.سهل{color:#15803d}
+body.light .level.صعب,body.light .level.مشروع{color:#dc2626}
+body.light .stage{background:#ffffff}
+body.light .ex-head{background:#0f172a08}
+body.light .picker-overlay{background:#e2e8f0f2}
