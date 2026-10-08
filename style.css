@@ -103,6 +103,27 @@ pre{direction:ltr;text-align:left;margin:0;background:var(--code-bg);color:#e2e8
 .footer{color:var(--muted);font-size:13px;text-align:center;padding:24px;border-top:1px solid var(--border);margin-top:20px}
 .menu-fab{display:none;position:fixed;bottom:16px;right:16px;z-index:99;background:var(--accent);border:0;border-radius:99px;padding:12px 20px;font-weight:800}
 .close-side{display:none}
+.picker-overlay{position:fixed;inset:0;z-index:200;background:#050816ee;display:grid;place-items:center;padding:16px;backdrop-filter:blur(4px)}
+.picker-box{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;max-width:640px;width:100%;text-align:center}
+.picker-box h2{margin:8px 0;font-size:26px}
+.picker-box p{color:var(--muted)}
+.picker-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.picker-card{background:var(--card2);border:2px solid var(--border);border-radius:16px;padding:20px 14px;cursor:pointer;color:var(--text);display:flex;flex-direction:column;gap:6px;align-items:center}
+.picker-card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.picker-emoji{font-size:40px}
+.picker-card b{font-size:18px}
+.picker-card small{color:var(--muted);line-height:1.8}
+.btn.big{font-size:16px;padding:12px 22px}
+.btn.alt{background:#38bdf8;border-color:#38bdf8;color:#06283a}
+.stage-wrap{background:#a78bfa0e;border:1px dashed #a78bfa66;border-radius:12px;padding:12px;margin:12px 0}
+.stage{background:#ffffff10;border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:8px;min-height:50px}
+.stage button{cursor:pointer;padding:6px 14px;border-radius:8px;border:1px solid var(--border)}
+.stage input{padding:6px 10px;border-radius:8px;border:1px solid var(--border);font-family:inherit}
+#trackName{font-weight:800;color:var(--accent)}
+@media(max-width:900px){
+.picker-cards{grid-template-columns:1fr}
+.picker-box{padding:20px 14px}
+}
 .side-head-row{display:flex;justify-content:space-between;align-items:center}
 @media(max-width:900px){
   .layout{grid-template-columns:minmax(0,1fr)}

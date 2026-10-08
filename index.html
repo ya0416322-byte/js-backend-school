@@ -21,13 +21,14 @@
     <div class="search-box">
       <input id="searchInput" type="search" placeholder="دوّر على درس... مثال: Promise, JWT, Express">
     </div>
+    <button id="trackBtn" class="btn ghost" title="غيّر المسار">🔀 المسار</button>
     <button id="themeBtn" class="btn ghost" title="وضع فاتح / غامق">🌙</button>
     <button id="resetBtn" class="btn ghost" title="تصفير التقدم">↺</button>
   </div>
 </header>
 
 <div class="progress-wrap">
-  <div class="progress-info"><span id="progressText">0% مكتمل</span><span id="countText"></span></div>
+  <div class="progress-info"><span id="trackName"></span><span id="progressText">اختار مسارك من فوق 👆</span><span id="countText"></span></div>
   <div class="progress-bar"><div id="progressFill"></div></div>
 </div>
 
@@ -58,9 +59,10 @@
         <div class="hero-card"><b>3</b><span>مشاريع باك اند</span></div>
       </div>
       <div class="hero-btns">
-        <button class="btn primary" onclick="startFirst()">🚀 ابدأ من الدرس الأول</button>
-        <button class="btn" onclick="goProjects()">📦 روح للمشاريع على طول</button>
+        <button class="btn primary big" onclick="chooseTrack('backend')">🖥️ مسار الباك اند (Node.js)</button>
+        <button class="btn primary big alt" onclick="chooseTrack('frontend')">🎨 مسار الفرونت اند (DOM)</button>
       </div>
+      <p class="hero-sub" style="font-size:13px">اختار مسارك وهيتفتح لك المنهج الخاص بيه: الباك = Node و Express وقواعد البيانات — الفرونت = المتصفح و DOM والأحداث والمشاريع التفاعلية. وتقدر تبدّل بينهم أي وقت من زرار 🔀 المسار.</p>
       <div class="filter-box">
         <div class="filter-title">هنشرح ✅ / مش هنشرح ❌ (لأنها فرونت)</div>
         <div class="filter-grid">
@@ -89,10 +91,31 @@
 
 <script src="why1.js"></script>
 <script src="why2.js"></script>
+<div id="trackPicker" class="picker-overlay hidden">
+  <div class="picker-box">
+    <div class="hero-badge">اختار طريقك 🛤️</div>
+    <h2>عايز تتعلم جافاسكريبت ليه؟</h2>
+    <p>اختار المسار وهنوديك على منهجه الكامل من منهج الزيرو — وتقدر تغيّر أي وقت.</p>
+    <div class="picker-cards">
+      <button class="picker-card" onclick="chooseTrack('backend')">
+        <span class="picker-emoji">🖥️</span>
+        <b>باك اند Backend</b>
+        <small>Node.js + Express + MongoDB + JWT — تبني السيرفر والـ API</small>
+      </button>
+      <button class="picker-card" onclick="chooseTrack('frontend')">
+        <span class="picker-emoji">🎨</span>
+        <b>فرونت اند Frontend</b>
+        <small>DOM + أحداث + تخزين المتصفح + مشاريع تفاعلية</small>
+      </button>
+    </div>
+  </div>
+</div>
 <script src="beginner.js"></script>
 <script src="deep1.js"></script>
 <script src="deep2.js"></script>
 <script src="problems.js"></script>
+<script src="frontend.js"></script>
+<script src="fwhy.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

@@ -688,12 +688,40 @@ quiz:{q:"بعد ما تخلص المشروع، أول خطوة للرفع؟", op
 ]}
 ];
 
-/* ---------- engine ---------- */
-let done = JSON.parse(localStorage.getItem("jsb_done") || "[]");
-let current = localStorage.getItem("jsb_current") || "m0l0";
-
-const flat = [];
-CURRICULUM.forEach(m => m.lessons.forEach(l => flat.push({...l, modTitle: m.title})));
+/* ---------- tracks ---------- */
+const TRACKS = {
+  backend: { curr: () => CURRICULUM, first: "m0lz", project: "m9l2", label: "الباك اند 🖥️" },
+  frontend: { curr: () => F_CURRICULUM, first: "f0l0", project: "f4l2", label: "الفرونت اند 🎨" }
+};
+let track = localStorage.getItem("jsb_track") || null;
+let done = [];
+let current = null;
+let flat = [];
+function activeCurr(){ return TRACKS[track].curr(); }
+function loadTrack(){
+  done = JSON.parse(localStorage.getItem("jsb_done_" + track) || "[]");
+  current = localStorage.getItem("jsb_current_" + track) || TRACKS[track].first;
+  flat = [];
+  activeCurr().forEach(m => m.lessons.forEach(l => flat.push({...l, modTitle: m.title})));
+}
+function save(){
+  localStorage.setItem("jsb_done_" + track, JSON.stringify(done));
+  localStorage.setItem("jsb_current_" + track, current);
+  localStorage.setItem("jsb_track", track);
+}
+function chooseTrack(t){
+  if (!TRACKS[t]) return;
+  track = t; loadTrack(); save();
+  document.getElementById("trackPicker").classList.add("hidden");
+  document.getElementById("lessonBox").innerHTML = "";
+  document.getElementById("searchResults").classList.add("hidden");
+  document.getElementById("searchInput").value = "";
+  document.getElementById("hero").style.display = "";
+  document.getElementById("trackName").textContent = TRACKS[t].label;
+  renderNav(); renderRoadmap();
+  document.getElementById("sidebar").classList.remove("open");
+  window.scrollTo({top: 0, behavior: "smooth"});
+}
 
 function save(){ localStorage.setItem("jsb_done", JSON.stringify(done)); localStorage.setItem("jsb_current", current); }
 function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
@@ -701,7 +729,7 @@ function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/
 function renderNav(){
   const nav = document.getElementById("nav");
   nav.innerHTML = "";
-  CURRICULUM.forEach((m, mi) => {
+  activeCurr().forEach((m, mi) => {
     const d = document.createElement("div");
     d.className = "mod" + (m.lessons.some(l=>l.id===current) ? " open" : (mi===0?" open":""));
     d.innerHTML = `<div class="mod-head"><div>${esc(m.title)}<small>${esc(m.desc)}</small></div><span>▾</span></div><div class="mod-lessons"></div>`;
@@ -722,14 +750,12 @@ function renderNav(){
   document.getElementById("countText").textContent = "مستواك: " + (pct<20?"مبتدئ 🌱":pct<60?"متوسط 🔥":pct<100?"متقدم 🚀":"جاهز للشغل 💼");
 }
 
-function runCode(code, outEl){
+function runCode(code, outEl, stageEl){
   const logs = [];
   const fakeConsole = { log: (...a) => logs.push(a.map(x => typeof x === "object" ? JSON.stringify(x) : String(x)).join(" ")) };
   try {
-    const fn = new Function("console", `"use strict";(async()=>{${code}})().catch(e=>console.log("خطأ: "+e.message));`);
-    // run sync capture: wrap without async for simple cases
-    const syncFn = new Function("console", code);
-    syncFn(fakeConsole);
+    const syncFn = new Function("console", "stage", code);
+    syncFn(fakeConsole, stageEl || document.createElement("div"));
     setTimeout(()=>{ outEl.textContent = logs.join("\n") || "(مفيش طباعة)"; }, 350);
     outEl.textContent = logs.join("\n") || "⏳ بيتنفذ...";
   } catch(e){ outEl.textContent = "خطأ: " + e.message; }
@@ -751,6 +777,7 @@ function openLesson(id){
     ${(typeof BEGINNER !== "undefined" && BEGINNER[l.id])?`<div class="beginner">🌱 <b>لو أول مرة تتعلم برمجة — اقرا ده الأول:</b><br>${BEGINNER[l.id]}</div>`:""}
     <div class="explain">${(typeof DEEP !== "undefined" && DEEP[l.id]) ? DEEP[l.id] : l.html}</div>
     ${(typeof STRONG !== "undefined" && STRONG[l.id])?`<div class="strong">💪 <b>تثبيت الأساس:</b> ${STRONG[l.id]}</div>`:""}
+    ${l.stageHtml?`<div class="stage-wrap"><b>🎭 مسرح التجربة:</b><div class="stage" id="stage-${idx}">${l.stageHtml}</div></div>`:""}
     <h3>💻 الأمثلة (من السهل للصعب)</h3>`;
   l.examples.forEach((ex, i) => {
     const w = (typeof WHY !== "undefined" && WHY[l.id] && WHY[l.id][i]) || "";
@@ -802,7 +829,8 @@ function openLesson(id){
 function runExample(li, ei){
   const ex = flat[li].examples[ei];
   const out = document.getElementById(`out-${li}-${ei}`);
-  runCode(ex.code, out);
+  const st = document.getElementById(`stage-${li}`);
+  runCode(ex.code, out, st);
 }
 function copyExample(li, ei){
   navigator.clipboard.writeText(flat[li].examples[ei].code).then(()=>alert("اتنسخ ✅ الصقه في VS Code وجرّبه"));
@@ -821,11 +849,11 @@ function toggleDone(id){
   save(); renderNav(); openLesson(id);
 }
 function startFirst(){ const first = flat.find(l=>!done.includes(l.id)) || flat[0]; openLesson(first.id); }
-function goProjects(){ openLesson("m9l2"); }
+function goProjects(){ openLesson(TRACKS[track].project); }
 
 function renderRoadmap(){
   const r = document.getElementById("roadmap");
-  r.innerHTML = CURRICULUM.map(m=>{
+  r.innerHTML = activeCurr().map(m=>{
     const c = m.lessons.filter(l=>done.includes(l.id)).length;
     return `<div class="rm-card"><h3>${esc(m.title)} — ${c}/${m.lessons.length} ✅</h3><p style="color:var(--muted);margin:0">${esc(m.desc)}</p><div>${m.lessons.map(l=>`<button class="btn small" style="margin:4px" onclick="openLesson('${l.id}')">${done.includes(l.id)?"✅":"○"} ${esc(l.title)}</button>`).join("")}</div></div>`;
   }).join("");
@@ -845,5 +873,6 @@ document.getElementById("themeBtn").onclick = e => {
   e.target.textContent = document.body.classList.contains("light") ? "🌞" : "🌙";
 };
 document.getElementById("resetBtn").onclick = () => { if(confirm("تصفّر تقدمك كله؟")){ done=[]; save(); renderNav(); renderRoadmap(); } };
-
-renderNav(); renderRoadmap();
+document.getElementById("trackBtn").onclick = () => document.getElementById("trackPicker").classList.remove("hidden");
+if (track && TRACKS[track]) { chooseTrack(track); }
+else { document.getElementById("trackPicker").classList.remove("hidden"); }
