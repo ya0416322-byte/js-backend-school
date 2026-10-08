@@ -690,8 +690,8 @@ quiz:{q:"بعد ما تخلص المشروع، أول خطوة للرفع؟", op
 
 /* ---------- tracks ---------- */
 const TRACKS = {
-  backend: { curr: () => CURRICULUM, first: "m0lz", project: "m9l2", label: "الباك اند 🖥️" },
-  frontend: { curr: () => F_CURRICULUM, first: "f0l0", project: "f4l2", label: "الفرونت اند 🎨" }
+  backend: { curr: () => CURRICULUM, first: "m0lz", project: "m9l2", label: "الباك اند 🖥️", brand: "جافاسكريبت للباك اند", sub: "من الصفر لحد ما تبني API حقيقي — بدون فرونت" },
+  frontend: { curr: () => F_CURRICULUM, first: "f0l0", project: "f4l2", label: "الفرونت اند 🎨", brand: "جافاسكريبت للفرونت اند", sub: "من الصفر لحد مشاريع تفاعلية — بدون باك اند" }
 };
 let track = localStorage.getItem("jsb_track") || null;
 let done = [];
@@ -718,6 +718,8 @@ function chooseTrack(t){
   document.getElementById("searchInput").value = "";
   document.getElementById("hero").style.display = "";
   document.getElementById("trackName").textContent = TRACKS[t].label;
+  document.getElementById("brandTitle").textContent = TRACKS[t].brand;
+  document.getElementById("brandSub").textContent = TRACKS[t].sub;
   renderNav(); renderRoadmap();
   document.getElementById("sidebar").classList.remove("open");
   window.scrollTo({top: 0, behavior: "smooth"});
