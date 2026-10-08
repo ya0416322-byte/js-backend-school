@@ -709,7 +709,13 @@ let current = null;
 let flat = [];
 function activeCurr(){ return TRACKS[track].curr(); }
 function loadTrack(){
-  done = JSON.parse(localStorage.getItem("jsb_done_" + track) || "[]");
+  let raw = localStorage.getItem("jsb_done_" + track);
+  if (raw === null) {
+    raw = localStorage.getItem("jsb_done") || "[]";
+    localStorage.removeItem("jsb_done");
+    localStorage.removeItem("jsb_current");
+  }
+  done = JSON.parse(raw);
   current = localStorage.getItem("jsb_current_" + track) || TRACKS[track].first;
   flat = [];
   activeCurr().forEach(m => m.lessons.forEach(l => flat.push({...l, modTitle: m.title})));
@@ -741,7 +747,6 @@ function chooseTrack(t){
   window.scrollTo({top: 0, behavior: "smooth"});
 }
 
-function save(){ localStorage.setItem("jsb_done", JSON.stringify(done)); localStorage.setItem("jsb_current", current); }
 function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); }
 
 function renderNav(){
