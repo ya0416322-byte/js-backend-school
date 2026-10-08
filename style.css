@@ -97,7 +97,7 @@ pre{direction:ltr;text-align:left;margin:0;background:var(--code-bg);color:#e2e8
 .done-row{margin-top:12px;text-align:center}
 .search-results{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px;margin-bottom:16px}
 .search-results button{display:block;width:100%;text-align:right;background:transparent;border:0;border-bottom:1px solid var(--border);padding:8px;color:var(--text);cursor:pointer}
-.hidden{display:none}
+.hidden{display:none!important}
 .roadmap .rm-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:12px}
 .rm-card h3{margin:0 0 6px}
 .footer{color:var(--muted);font-size:13px;text-align:center;padding:24px;border-top:1px solid var(--border);margin-top:20px}
