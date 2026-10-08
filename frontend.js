@@ -1,5 +1,5 @@
 /* F_CURRICULUM — مسار الفرونت اند من منهج الزيرو (DOM/BOM/Events/Projects) */
-const F_CURRICULUM = [
+const F_CURRICULUM = [...F_BASICS,
 {
 id:"f0", title:"المرحلة 0: مدخل الفرونت", desc:"إزاي جافاسكريبت بتشتغل جوّا المتصفح.",
 lessons:[
