@@ -690,8 +690,18 @@ quiz:{q:"بعد ما تخلص المشروع، أول خطوة للرفع؟", op
 
 /* ---------- tracks ---------- */
 const TRACKS = {
-  backend: { curr: () => CURRICULUM, first: "m0lz", project: "m9l2", label: "الباك اند 🖥️", brand: "جافاسكريبت للباك اند", sub: "من الصفر لحد ما تبني API حقيقي — بدون فرونت" },
-  frontend: { curr: () => F_CURRICULUM, first: "f0l0", project: "f4l2", label: "الفرونت اند 🎨", brand: "جافاسكريبت للفرونت اند", sub: "من الصفر لحد مشاريع تفاعلية — بدون باك اند" }
+  backend: { curr: () => CURRICULUM, first: "m0lz", project: "m9l2", label: "الباك اند 🖥️", brand: "جافاسكريبت للباك اند", sub: "من الصفر لحد ما تبني API حقيقي — بدون فرونت",
+    badge: "مسار Backend بـ JavaScript + Node.js — بالعربي", title: "عايز تشتغل باك اند بجافاسكريبت؟<br>ابدأ من هنا ومتضيعش وقتك في الفرونت.",
+    heroSub: "هتتعلم اللغة نفسها → الجافاسكريبت المتقدمة → البرمجة غير المتزامنة → Node.js → Express → قواعد البيانات → الأمان → مشروع متجر كامل + رفع على سيرفر. كل درس فيه شرح + 3 أمثلة من السهل للصعب + كود تقدر تشغّله + تمرين + اختبار.",
+    fTitle: "هنشرح ✅ / مش هنشرح ❌ (لأنها فرونت)",
+    fYes: "✅ المتغيرات، الشروط، اللوب، الفانكشنز، المصفوفات، الكائنات، Destructuring، Spread، Map/Filter/Reduce، OOP، Modules، JSON، Error Handling، Promises، Async/Await، Event Loop، Node، NPM، Express، MongoDB، JWT",
+    fNo: "❌ DOM (getElementById / querySelector...) — BOM (window / localStorage بتاع المتصفح / history) — Canvas — CSS-in-JS — أحداث الماوس والكيبورد في الصفحة" },
+  frontend: { curr: () => F_CURRICULUM, first: "f0l0", project: "f4l2", label: "الفرونت اند 🎨", brand: "جافاسكريبت للفرونت اند", sub: "من الصفر لحد مشاريع تفاعلية — بدون باك اند",
+    badge: "مسار Frontend بـ JavaScript + DOM — بالعربي", title: "عايز تبني واجهات تفاعلية؟<br>ابدأ من هنا ومتضيعش وقتك في الباك.",
+    heroSub: "هتتعلم اللغة نفسها → اختيار العناصر → المحتوى والكلاسات → الأحداث والفورم → التخزين → جلب البيانات → 4 مشاريع تفاعلية. كل درس فيه شرح + 3 أمثلة من السهل للصعب + مسرح تجربة حي + تمرين + اختبار.",
+    fTitle: "هنشرح ✅ / مش هنشرح ❌ (لأنها باك)",
+    fYes: "✅ المتغيرات، الشروط، اللوب، الفانكشنز، المصفوفات، البحث والفرز، الكائنات، Destructuring، Spread، Map/Filter/Reduce، JSON، localStorage، DOM، الأحداث، الفورم، المؤقتات، BOM، Fetch API، مشاريع تفاعلية",
+    fNo: "❌ Node.js و Express و MongoDB و JWT — دي شغل السيرفر (مسار الباك اند) ومش محتاجها كفرونت" }
 };
 let track = localStorage.getItem("jsb_track") || null;
 let done = [];
@@ -720,6 +730,12 @@ function chooseTrack(t){
   document.getElementById("trackName").textContent = TRACKS[t].label;
   document.getElementById("brandTitle").textContent = TRACKS[t].brand;
   document.getElementById("brandSub").textContent = TRACKS[t].sub;
+  document.getElementById("heroBadge").textContent = TRACKS[t].badge;
+  document.getElementById("heroTitle").innerHTML = TRACKS[t].title;
+  document.getElementById("heroSub").textContent = TRACKS[t].heroSub;
+  document.getElementById("filterTitle").textContent = TRACKS[t].fTitle;
+  document.getElementById("filterYes").textContent = TRACKS[t].fYes;
+  document.getElementById("filterNo").textContent = TRACKS[t].fNo;
   renderNav(); renderRoadmap();
   document.getElementById("sidebar").classList.remove("open");
   window.scrollTo({top: 0, behavior: "smooth"});
@@ -755,6 +771,11 @@ function renderNav(){
 function runCode(code, outEl, stageEl){
   const logs = [];
   const fakeConsole = { log: (...a) => logs.push(a.map(x => typeof x === "object" ? JSON.stringify(x) : String(x)).join(" ")) };
+  fakeConsole.warn = fakeConsole.error = fakeConsole.info = fakeConsole.log;
+  fakeConsole.table = (x) => fakeConsole.log(typeof x === "object" ? JSON.stringify(x) : String(x));
+  const _t0 = {};
+  fakeConsole.time = (l) => { _t0[l || "default"] = Date.now(); };
+  fakeConsole.timeEnd = (l) => { const k = l || "default"; fakeConsole.log(k + ": " + (Date.now() - (_t0[k] || Date.now())) + "ms"); };
   try {
     const syncFn = new Function("console", "stage", code);
     syncFn(fakeConsole, stageEl || document.createElement("div"));

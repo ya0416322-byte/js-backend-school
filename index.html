@@ -41,7 +41,7 @@
     <nav id="nav"></nav>
     <div class="side-note">
       <h3>📌 ملحوظة عن قناة الزيرو</h3>
-      <p>كورس <b>Learn JavaScript In Arabic 2021</b> للمهندس أسامة الزيرو فيه حوالي 188 فيديو. إحنا هنا واخدين كل اللي يخص <b>الباك اند</b> وشرحناه، وشايلين بتوع الفرونت (DOM / BOM / Canvas / Events في المتصفح) لأنك مش محتاجهم كباك اند.</p>
+      <p>كورس <b>Learn JavaScript In Arabic 2021</b> للمهندس أسامة الزيرو فيه حوالي 188 فيديو. إحنا هنا مقسمينه <b>مسارين</b>: الباك اند (اللغة + Node و Express والداتابيز) والفرونت اند (اللغة + DOM والأحداث والمشاريع) — بدّل بينهم من زرار 🔀 المسار.</p>
       <a href="https://www.youtube.com/playlist?list=PLDoPjvoNmBAx3kiplQR_oeDqLDBUDYwVv" target="_blank" rel="noopener">🔗 بلاي ليست الزيرو الأصلية</a><br>
       <a href="https://elzero.org/category/courses/javascript-bootcamp/" target="_blank" rel="noopener">🔗 شروحات وتكليفات elzero.org</a>
     </div>
@@ -49,9 +49,9 @@
 
   <main class="content">
     <section class="hero" id="hero">
-      <div class="hero-badge">مسار Backend بـ JavaScript + Node.js — بالعربي</div>
-      <h2>عايز تشتغل باك اند بجافاسكريبت؟<br>ابدأ من هنا ومتضيعش وقتك في الفرونت.</h2>
-      <p class="hero-sub">هتتعلم اللغة نفسها → الجافاسكريبت المتقدمة → البرمجة غير المتزامنة → Node.js → Express → قواعد البيانات → الأمان → مشروع متجر كامل + رفع على سيرفر. كل درس فيه شرح + 3 أمثلة من السهل للصعب + كود تقدر تشغّله + تمرين + اختبار.</p>
+      <div class="hero-badge" id="heroBadge">مسار Backend بـ JavaScript + Node.js — بالعربي</div>
+      <h2 id="heroTitle">عايز تشتغل باك اند بجافاسكريبت؟<br>ابدأ من هنا ومتضيعش وقتك في الفرونت.</h2>
+      <p class="hero-sub" id="heroSub">هتتعلم اللغة نفسها → الجافاسكريبت المتقدمة → البرمجة غير المتزامنة → Node.js → Express → قواعد البيانات → الأمان → مشروع متجر كامل + رفع على سيرفر. كل درس فيه شرح + 3 أمثلة من السهل للصعب + كود تقدر تشغّله + تمرين + اختبار.</p>
       <div class="hero-grid">
         <div class="hero-card"><b>19</b><span>مرحلة (باك + فرونت)</span></div>
         <div class="hero-card"><b>57</b><span>درس مركز</span></div>
@@ -64,10 +64,10 @@
       </div>
       <p class="hero-sub" style="font-size:13px">اختار مسارك وهيتفتح لك المنهج الخاص بيه: الباك = Node و Express وقواعد البيانات — الفرونت = المتصفح و DOM والأحداث والمشاريع التفاعلية. وتقدر تبدّل بينهم أي وقت من زرار 🔀 المسار.</p>
       <div class="filter-box">
-        <div class="filter-title">هنشرح ✅ / مش هنشرح ❌ (لأنها فرونت)</div>
+        <div class="filter-title" id="filterTitle">هنشرح ✅ / مش هنشرح ❌ (لأنها فرونت)</div>
         <div class="filter-grid">
-          <div class="yes">✅ المتغيرات، الشروط، اللوب، الفانكشنز، المصفوفات، الكائنات، Destructuring، Spread، Map/Filter/Reduce، OOP، Modules، JSON، Error Handling، Promises، Async/Await، Event Loop، Node، NPM، Express، MongoDB، JWT</div>
-          <div class="no">❌ DOM (getElementById / querySelector...) — BOM (window / localStorage بتاع المتصفح / history) — Canvas — CSS-in-JS — أحداث الماوس والكيبورد في الصفحة</div>
+          <div class="yes" id="filterYes">✅ المتغيرات، الشروط، اللوب، الفانكشنز، المصفوفات، الكائنات، Destructuring، Spread، Map/Filter/Reduce، OOP، Modules، JSON، Error Handling، Promises، Async/Await، Event Loop، Node، NPM، Express، MongoDB، JWT</div>
+          <div class="no" id="filterNo">❌ DOM (getElementById / querySelector...) — BOM (window / localStorage بتاع المتصفح / history) — Canvas — CSS-in-JS — أحداث الماوس والكيبورد في الصفحة</div>
         </div>
       </div>
     </section>
@@ -81,7 +81,7 @@
     </section>
 
     <footer class="footer">
-      <p>اتعمل بحب للي عايز يبقى <b>Node.js Backend Developer</b> — المحتوى شرح مبسط مستوحى من منهج م. أسامة الزيرو (قناة Elzero Web School) مع إعادة تنظيم كاملة لمسار الباك اند فقط.</p>
+      <p>اتعمل بحب للي عايز يبقى مطور جافاسكريبت — المحتوى شرح مبسط مستوحى من منهج م. أسامة الزيرو (قناة Elzero Web School) مع إعادة تنظيم كاملة لمساري الباك اند والفرونت اند.</p>
       <p>نصيحة الزيرو المشهورة: متتفرجش وخلاص — اكتب الكود بإيدك وحل التكليفات.</p>
     </footer>
   </main>
@@ -116,8 +116,8 @@
 <script src="problems.js?v=3"></script>
 <script src="fb.js?v=4"></script>
 <script src="fwhy-b.js?v=4"></script>
-<script src="frontend.js?v=4"></script>
+<script src="frontend.js?v=5"></script>
 <script src="fwhy.js?v=3"></script>
-<script src="app.js?v=4"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>

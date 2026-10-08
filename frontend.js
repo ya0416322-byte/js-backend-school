@@ -84,7 +84,7 @@ examples:[
 code:`stage.querySelector("#addBtn").onclick = () => {\n  const li = document.createElement("li");\n  li.textContent = "عنصر جديد ✨";\n  stage.querySelector("#list").append(li);\n};\nconsole.log("دوس + ضيف عنصر كذا مرة");`,
 output:`دوس + ضيف عنصر كذا مرة`},
 {title:"مثال 2 (متوسط): احذف بالضغط", level:"متوسط", runnable:true,
-code:`stage.querySelectorAll("#list li").forEach(li => {\n  li.onclick = () => li.remove();\n};\nconsole.log("دوس على أي عنصر يتمسح 🗑️");`,
+code:`stage.querySelectorAll("#list li").forEach(li => {\n  li.onclick = () => li.remove();\n});\nconsole.log("دوس على أي عنصر يتمسح 🗑️");`,
 output:`دوس على أي عنصر يتمسح 🗑️`},
 {title:"مثال 3 (صعب): عدّ العناصر", level:"صعب", runnable:true,
 code:`const count = stage.querySelector("#list").children.length;\nconsole.log("عدد العناصر حاليا:", count);`,
